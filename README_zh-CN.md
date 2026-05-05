@@ -2,12 +2,30 @@
 
 将 Claude Code 对话记录导出为 Markdown 文件的技能。
 
+## 为什么选择这个项目？
+
+已有一个 Python CLI 工具（[claude-conversation-extractor](https://github.com/ZeroSumQuant/claude-conversation-extractor)）用于导出 Claude Code 对话。本项目采用了不同的方式：
+
+| 功能 | Claude Export Conversation | claude-conversation-extractor |
+|------|---------------------------|------------------------------|
+| 类型 | Claude Code **Skill** | Python CLI 工具 |
+| 安装方式 | 复制 1 个文件 | pip/pipx 安装 |
+| 触发方式 | 在 Claude 内执行 `/export-conversation` | 在终端执行 claude-extract |
+| 无缝集成 | ✅ 直接在 Claude Code 内运行 | ❌ 需要切换到终端 |
+| 合并策略 | ✅ 同日多次导出自动合并 | ❌ 覆盖文件 |
+| 搜索功能 | ❌ 不包含 | ✅ 实时搜索 |
+| 批量导出 | ❌ 需手动处理 | ✅ 一键导出所有 |
+| 输出格式 | Markdown | Markdown/JSON/HTML |
+
+本项目专注于**简单**和**无缝集成 Claude Code** — 无需切换终端、无依赖，直接 `/export-conversation`。
+
 ## 功能特点
 
-- 将对话历史导出为可读的 Markdown 格式
-- 文件名自动根据项目名称和日期生成
-- 合并策略：同一天的多次导出会合并，而非覆盖
-- 所有对话轮次都会保留，包含时间戳
+- **无缝集成** — 作为 Claude Code Skill 直接运行，无需切换到终端
+- **单文件安装** — 只需复制 SKILL.md，无需 pip/pipx
+- **合并策略** — 同一天的多次导出会合并，而非覆盖
+- **可读格式** — 清晰导出，包含时间戳和轮次编号
+- **自动命名** — 文件自动命名为 `{项目名}_{YYYYMMDD}.md`
 
 ## 安装方法
 
@@ -82,7 +100,7 @@ cp claude-export-conversation/SKILL.md ~/.claude/skills/export-conversation/skil
 - **首次导出**：创建新文件，包含所有对话轮次
 - **后续导出**：只追加新对话轮次到现有文件
 
-这确保了对话历史不会被丢失。
+这确保了对话历史不会被丢失 — 这是与其他导出工具的关键区别。
 
 ## 输出格式
 

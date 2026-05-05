@@ -2,12 +2,30 @@
 
 A Claude Code skill to export conversation history to Markdown files.
 
+## Why This Project?
+
+There is an existing Python CLI tool ([claude-conversation-extractor](https://github.com/ZeroSumQuant/claude-conversation-extractor)) for exporting Claude Code conversations. This project takes a different approach:
+
+| Feature | Claude Export Conversation | claude-conversation-extractor |
+|---------|---------------------------|------------------------------|
+| Type | Claude Code **Skill** | Python CLI Tool |
+| Installation | Copy 1 file | pip/pipx install |
+| Trigger | `/export-conversation` in Claude | claude-extract in terminal |
+| Seamless Integration | ✅ Works inside Claude Code | ❌ Requires terminal |
+| Merge Strategy | ✅ Combines same-day exports | ❌ Overwrites |
+| Search Capability | ❌ Not included | ✅ Real-time search |
+| Bulk Export | ❌ Manual | ✅ One-click all sessions |
+| Output Formats | Markdown | Markdown/JSON/HTML |
+
+This project focuses on **simplicity** and **seamless Claude Code integration** — no terminal switching, no dependencies, just `/export-conversation`.
+
 ## Features
 
-- Export conversation history to readable Markdown format
-- Automatic filename based on project name and date
-- Merge strategy: multiple exports on the same day are combined, not overwritten
-- All conversation turns are preserved with timestamps
+- **Seamless Integration** — Works directly inside Claude Code as a Skill, no terminal needed
+- **One-File Installation** — Just copy the SKILL.md file, no pip/pipx required
+- **Merge Strategy** — Multiple exports on the same day are combined, not overwritten
+- **Readable Markdown** — Clean export with timestamps and turn numbers
+- **Auto Naming** — Files named automatically as `{project-name}_{YYYYMMDD}.md`
 
 ## Installation
 
@@ -39,7 +57,7 @@ Before first use, configure the output directory in your `~/.claude/settings.jso
       "outputDir": "/path/to/your/export/directory"
     }
   }
- }
+}
 ```
 
 **Example for macOS:**
@@ -82,7 +100,7 @@ If you export the same project multiple times on the same day:
 - **First export**: Creates a new file with all conversation turns
 - **Subsequent exports**: Appends only new turns to the existing file
 
-This ensures no conversation history is lost.
+This ensures no conversation history is lost — a key difference from other export tools that simply overwrite.
 
 ## Output Format
 

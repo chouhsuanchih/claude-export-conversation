@@ -105,27 +105,27 @@ This ensures no conversation history is lost — a key difference from other exp
 ## Output Format
 
 ```markdown
-# 与 Claude 的对话记录
+# Conversation with Claude
 
-**项目**：/path/to/project
+**Project**: /path/to/project
 
-**导出时间**：2026-05-05 14:30:00
+**Exported At**: 2026-05-05 14:30:00
 
-**对话轮数**：25
+**Total Turns**: 25
 
 ---
 
-## 第 1 轮
+## Turn 1
 
-**时间**：2026-05-05 10:00:00
+**Time**: 2026-05-05 10:00:00
 
-**用户**：
-消息内容...
+**User**: 
+Message content...
 
-**时间**：2026-05-05 10:01:00
+**Time**: 2026-05-05 10:01:00
 
-**Claude**：
-回复内容...
+**Claude**: 
+Reply content...
 
 ---
 ```

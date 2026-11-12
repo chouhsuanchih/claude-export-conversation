@@ -1,6 +1,6 @@
 ---
 name: export-conversation
-description: Export the current Claude Code conversation to a Markdown file. Use when user asks to "export conversation", "导出对话", "save conversation", "导出聊天记录", or wants to export/save the current chat history to a file.
+description: Export the current Claude Code conversation to a Markdown file. Use when user asks to "export conversation", "save conversation", "export chat history", or wants to export/save the current chat history to a file.
 version: 3.0.0
 ---
 
@@ -38,8 +38,8 @@ No arguments needed. Output path and filename are determined automatically.
    - All projects' conversations are exported to this unified directory
    - Create the directory if it doesn't exist
 
-2. **Filename format**: `{项目文件夹名}_{YYYYMMDD}.md`
-   - 项目文件夹名 = the name of the current project's root folder (e.g., "my-project", "work-docs")
+2. **Filename format**: `{project-folder-name}_{YYYYMMDD}.md`
+   - project-folder-name = the name of the current project's root folder (e.g., "my-project", "work-docs")
    - Date = the date of export in YYYYMMDD format
    - Example: `my-project_20260505.md`, `work-docs_20260413.md`
 
@@ -47,7 +47,7 @@ No arguments needed. Output path and filename are determined automatically.
    - If the target file already exists, DO NOT overwrite it
    - Instead, read the existing file and determine the last exported turn number
    - Append new conversation turns starting from the next turn number
-   - Update the metadata at the top of the file (导出时间, 对话轮数)
+   - Update the metadata at the top of the file (Exported At, Total Turns)
    - This ensures all conversation records are preserved across multiple exports on the same day
 
 ## What It Does
@@ -71,32 +71,32 @@ No arguments needed. Output path and filename are determined automatically.
 ## Output Format
 
 ```markdown
-# 与 Claude 的对话记录
+# Conversation with Claude
 
-**项目**：/path/to/project
+**Project**: /path/to/project
 
-**导出时间**：2026-05-05 14:30:00
+**Exported At**: 2026-05-05 14:30:00
 
-**对话轮数**：25
+**Total Turns**: 25
 
-
----
-
-## 第 1 轮
-
-**时间**：2026-05-05 10:00:00
-
-**用户**：
-消息内容...
-
-**时间**：2026-05-05 10:01:00
-
-**Claude**：
-回复内容...
 
 ---
 
-## 第 2 轮
+## Turn 1
+
+**Time**: 2026-05-05 10:00:00
+
+**User**: 
+Message content...
+
+**Time**: 2026-05-05 10:01:00
+
+**Claude**: 
+Reply content...
+
+---
+
+## Turn 2
 ...
 ```
 
@@ -105,13 +105,13 @@ No arguments needed. Output path and filename are determined automatically.
 When the target file already exists:
 
 1. Read the existing markdown file
-2. Find the last `## 第 N 轮` heading to determine N (the last exported turn number)
+2. Find the last `## Turn N` heading to determine N (the last exported turn number)
 3. Parse the current JSONL and format ALL turns as markdown
 4. Take only turns with number > N (the new turns)
 5. Append these new turns to the existing file (before any trailing content)
 6. Update the metadata:
-   - **导出时间**: update to current time
-   - **对话轮数**: update to the new total count
+   - **Exported At**: update to current time
+   - **Total Turns**: update to the new total count
 7. Write the merged result back to the file
 
 ## Implementation
